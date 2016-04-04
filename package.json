@@ -1,0 +1,20 @@
+{
+  "name": "glisy",
+  "version": "0.0.1",
+  "repo": "glisy/vao",
+  "description": "GlisyVAO",
+  "keywords": [
+    "glisy",
+    "vao",
+    "vertex",
+    "array"
+  ],
+  "src": [
+    "include/glisy/vao.h",
+    "src/vao.c"
+  ],
+  "dependencies": {
+    "glisy/buffer": "master",
+    "glisy/gl": "master"
+  }
+}

@@ -80,7 +80,7 @@ glisyVAOUpdate(GlisyVAO *vao, GlisyBuffer *elements) {
                  attr->buffer.usage);
 
     // bind attribute to location
-    glVertexAttribPointer(location,
+    glVertexAttribPointer(attr->location,
                           attr->buffer.dimension,
                           attr->buffer.type,
                           attr->buffer.normalized,

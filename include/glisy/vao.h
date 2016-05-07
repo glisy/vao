@@ -18,7 +18,7 @@ extern "C" {
 
 typedef struct GlisyVAOAttribute GlisyVAOAttribute;
 struct GlisyVAOAttribute {
-  GLuint location;
+  GLint location;
   const char *name;
 
   struct {

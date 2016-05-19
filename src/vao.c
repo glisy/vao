@@ -62,7 +62,6 @@ glisyVAOUpdate(GlisyVAO *vao, GlisyBuffer *elements) {
 
   // bind vao attributes
   for (int i = 0; i < length; ++i) {
-    GLuint location = i;
     GlisyVAOAttribute *attr = &vao->attributes[i];
 
     // ensure .normalized is true or false
@@ -87,17 +86,24 @@ glisyVAOUpdate(GlisyVAO *vao, GlisyBuffer *elements) {
                           0, 0);
 
     // enable attribute at location
-    glEnableVertexAttribArray(location);
+    glEnableVertexAttribArray(attr->location);
   }
 }
 
 GLuint
 glisyVAOPush(GlisyVAO *vao, GlisyVAOAttribute *attr) {
+  GLint pid;
   if (!vao) return GL_FALSE;
   if (!attr) return GL_FALSE;
 
   if (vao->length < GLISY_MAX_VAO_ATTRIBS) {
-    attr->location = vao->length;
+    glGetIntegerv(GL_CURRENT_PROGRAM, &pid);
+    attr->location = glGetAttribLocation(pid, attr->name);
+
+    if (attr->location < 0) {
+      attr->location = vao->length;
+    }
+
     vao->attributes[vao->length++] = *attr;
   }
 

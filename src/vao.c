@@ -98,7 +98,9 @@ glisyVAOPush(GlisyVAO *vao, GlisyVAOAttribute *attr) {
 
   if (vao->length < GLISY_MAX_VAO_ATTRIBS) {
     glGetIntegerv(GL_CURRENT_PROGRAM, &pid);
-    attr->location = glGetAttribLocation(pid, attr->name);
+    if (attr->name) {
+      attr->location = glGetAttribLocation(pid, attr->name);
+    }
 
     if (attr->location < 0) {
       attr->location = vao->length;

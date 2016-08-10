@@ -41,6 +41,7 @@ typedef struct GlisyVAO GlisyVAO;
 struct GlisyVAO {
   GLuint handle;
   GLuint length;
+  GLuint vbo[GLISY_MAX_VAO_ATTRIBS];
   GlisyVAOAttribute attributes[GLISY_MAX_VAO_ATTRIBS];
   GLboolean useElements;
 };

@@ -43,14 +43,8 @@ glisyVAOUpdate(GlisyVAO *vao, GlisyBuffer *elements) {
   // number of bound attributes for this VAO
   GLuint length = vao->length;
 
-  // vertex buffer objects of VAO attribute length
-  GLuint vbo[length];
-
   // bind vao
   glisyVAOBind(vao);
-
-  // init vbo
-  glGenBuffers(length, vbo);
 
   // bind elements if given
   if (elements) {
@@ -70,7 +64,7 @@ glisyVAOUpdate(GlisyVAO *vao, GlisyBuffer *elements) {
     }
 
     // bind current vbo
-    glBindBuffer(GL_ARRAY_BUFFER, vbo[i]);
+    glBindBuffer(GL_ARRAY_BUFFER, vao->vbo[i]);
 
     // set vbo data from attribute
     glBufferData(GL_ARRAY_BUFFER,
@@ -106,7 +100,11 @@ glisyVAOPush(GlisyVAO *vao, GlisyVAOAttribute *attr) {
       attr->location = vao->length;
     }
 
+    GLuint *vbo = (GLuint *) &vao->vbo[vao->length];
     vao->attributes[vao->length++] = *attr;
+
+    // init vbo
+    glGenBuffers(1, vbo);
   }
 
   return vao->length;
